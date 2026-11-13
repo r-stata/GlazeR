@@ -1,0 +1,488 @@
+# ============================================================
+# GlazeR 转盘配置文件（.glazer）· 格式 v3
+# ------------------------------------------------------------
+# 编辑说明
+#   · 本文件是 UTF-8 纯文本；双击 .glazer 会用 GlazeR 的可编辑文档窗口
+#     打开（可保存 / 另存为 / 应用到转盘），也可用任意文本编辑器修改。
+#   · 以 # 开头的行是注释，空行会被忽略，可自由增删。
+#   · 【转盘】开始一套转盘；随后的【扇区】归属该转盘，直到下一个【转盘】。
+#     也接受英文段落标记 [[wheel]] / [[slice]]。
+#   · 字段写成「键 = 值」或「键: 值」，键名两侧空格忽略；值里的换行可写 \n。
+#   · 多行 R / Python / Stata 代码推荐写成三引号块，块内内容原样保留：
+#         自定义代码 = """
+#         readRDS(.file)
+#         """
+#   · 参数行可重复：参数.名称 = 表达式（R 用 TRUE / c(1,2)，Python 用 True / [1,2]，
+#     Stata 用命令行片段如 replace / n(5)）；停用参数.名称 = 表达式 表示不启用。
+#   · 颜色写 #RRGGBB；快捷键用 option / shift / control / command 以 + 连接。
+#   · 槽位 = 0…9：按住全局组合键 + 该数字直接呼出这套转盘，最多 10 套。
+#   · 引擎：R | Python | Stata（默认 R）。执行方式：函数 | 代码    批量：逐文件 | 整批
+#   · R 扇区自动解析：.file 完整路径 / .filename 文件名.后缀 / .dir 所在目录 /
+#     .filebasename 纯名称（不含后缀）/ .files 全部路径；写 .result、.out。
+#   · Python 扇区自动解析：FILE / FILENAME / DIR / FILEBASENAME / FILES / OUT，
+#     另有 glazer.file 等对象形式与内置 convert(FILE, "xlsx") 格式转换。
+#   · Stata 输入宏 `file' / `filename' / `dir' / `filebasename'；
+#     `out' 是完整输出文件路径（不是目录），`outdir' 是输出目录；
+#     另有 `file1'…`fileN'、`nfiles' 与同名全局宏 $file / $outdir 等。
+#   · 输出：无 | 打印 | .rds | .csv | .RData | .dta | 自定义
+#   · 编号是替换时的匹配依据，一般不要修改；删掉该行则按名称匹配。
+# ------------------------------------------------------------
+# 导入时可选择：替换同名转盘 / 全部作为新增 / 清空后导入。
+# ============================================================
+
+【转盘】
+编号 = EXAMPLE-WHEEL-001
+名称 = R 数据处理（示例）
+快捷键 = option
+槽位 = 1
+扇区数 = 6
+
+【扇区】
+标签 = CSV→RDS
+说明 = readr 读取 CSV
+颜色 = #4F46E5
+启用 = 是
+引擎 = R
+执行方式 = 函数
+函数 = readr::read_csv
+源文件 = 
+路径参数 = file
+自定义代码 = 
+批量 = 逐文件
+输出 = .rds
+输出后缀 = _data
+写出代码 = 
+参数.show_col_types = FALSE
+
+【扇区】
+标签 = DTA→RDS
+说明 = haven 读取 Stata
+颜色 = #2563EB
+启用 = 是
+引擎 = R
+执行方式 = 函数
+函数 = haven::read_dta
+源文件 = 
+路径参数 = file
+自定义代码 = 
+批量 = 逐文件
+输出 = .rds
+输出后缀 = _data
+写出代码 = 
+
+【扇区】
+标签 = XLSX→RDS
+说明 = readxl 读取 Excel
+颜色 = #0891B2
+启用 = 是
+引擎 = R
+执行方式 = 函数
+函数 = readxl::read_excel
+源文件 = 
+路径参数 = path
+自定义代码 = 
+批量 = 逐文件
+输出 = .rds
+输出后缀 = _data
+写出代码 = 
+
+【扇区】
+标签 = RDS→CSV
+说明 = 读取 rds 并写出 csv
+颜色 = #0D9488
+启用 = 是
+引擎 = R
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = file
+自定义代码 = readRDS(.file)
+批量 = 逐文件
+输出 = .csv
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = 数据概览
+说明 = summary 输出到日志
+颜色 = #16A34A
+启用 = 是
+引擎 = R
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = file
+自定义代码 = summary(readr::read_csv(.file, show_col_types = FALSE))
+批量 = 逐文件
+输出 = 打印
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = 转 DTA
+说明 = 写出 Stata 数据
+颜色 = #65A30D
+启用 = 是
+引擎 = R
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = file
+自定义代码 = readr::read_csv(.file, show_col_types = FALSE)
+批量 = 逐文件
+输出 = .dta
+输出后缀 = _glazed
+写出代码 = 
+
+【转盘】
+编号 = EXAMPLE-WHEEL-002
+名称 = Python 函数（示例）
+快捷键 = option
+槽位 = 2
+扇区数 = 3
+
+【扇区】
+标签 = 文件信息
+说明 = Python 代码里直接使用 FILE / DIR / FILEBASENAME
+颜色 = #8B5CF6
+启用 = 是
+引擎 = Python
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = """
+import os
+result = {
+    "路径": FILE,
+    "大小": os.path.getsize(FILE),
+    "目录": DIR,
+    "名称": FILEBASENAME,
+}
+"""
+批量 = 逐文件
+输出 = 打印
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = CSV 概览
+说明 = 调用 pandas 函数，默认参数按 Python 表达式求值
+颜色 = #2563EB
+启用 = 是
+引擎 = Python
+执行方式 = 函数
+函数 = pandas.read_csv
+源文件 = 
+路径参数 = filepath_or_buffer
+自定义代码 = 
+批量 = 逐文件
+输出 = 打印
+输出后缀 = _glazed
+写出代码 = 
+参数.encoding = "utf-8"
+停用参数.nrows = 100
+
+【扇区】
+标签 = 批量统计
+说明 = 整批处理，FILES 是全部路径列表
+颜色 = #0D9488
+启用 = 是
+引擎 = Python
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = result = {"文件数": len(FILES), "路径": FILES}
+批量 = 整批
+输出 = 打印
+输出后缀 = _glazed
+写出代码 = 
+
+【转盘】
+编号 = EXAMPLE-WHEEL-003
+名称 = 格式转换（DataWheel 示例）
+快捷键 = option
+槽位 = 3
+扇区数 = 10
+
+【扇区】
+标签 = CSV
+说明 = 转换为 .csv
+颜色 = #F59E0B
+启用 = 是
+引擎 = Python
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = convert(FILE, "csv")
+批量 = 逐文件
+输出 = 无
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = TSV
+说明 = 转换为 .tsv
+颜色 = #F97316
+启用 = 是
+引擎 = Python
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = convert(FILE, "tsv")
+批量 = 逐文件
+输出 = 无
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = TXT
+说明 = 转换为 .txt
+颜色 = #D97706
+启用 = 是
+引擎 = Python
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = convert(FILE, "txt")
+批量 = 逐文件
+输出 = 无
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = XLSX
+说明 = 转换为 .xlsx
+颜色 = #16A34A
+启用 = 是
+引擎 = Python
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = convert(FILE, "xlsx")
+批量 = 逐文件
+输出 = 无
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = DTA
+说明 = 转换为 .dta
+颜色 = #0891B2
+启用 = 是
+引擎 = Python
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = convert(FILE, "dta")
+批量 = 逐文件
+输出 = 无
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = RDS
+说明 = 转换为 .rds
+颜色 = #3B82F6
+启用 = 是
+引擎 = Python
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = convert(FILE, "rds")
+批量 = 逐文件
+输出 = 无
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = PARQUET
+说明 = 转换为 .parquet
+颜色 = #8B5CF6
+启用 = 是
+引擎 = Python
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = convert(FILE, "parquet")
+批量 = 逐文件
+输出 = 无
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = FEATHER
+说明 = 转换为 .feather
+颜色 = #EC4899
+启用 = 是
+引擎 = Python
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = convert(FILE, "feather")
+批量 = 逐文件
+输出 = 无
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = JSON
+说明 = 转换为 .json
+颜色 = #65A30D
+启用 = 是
+引擎 = Python
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = convert(FILE, "json")
+批量 = 逐文件
+输出 = 无
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = JSONL
+说明 = 转换为 .jsonl
+颜色 = #0D9488
+启用 = 是
+引擎 = Python
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = convert(FILE, "jsonl")
+批量 = 逐文件
+输出 = 无
+输出后缀 = _glazed
+写出代码 = 
+
+【转盘】
+编号 = EXAMPLE-WHEEL-004
+名称 = 常用工作流（示例）
+快捷键 = option + shift
+槽位 = 4
+扇区数 = 3
+
+【扇区】
+标签 = HTML→封面图
+说明 = 先 source 自己的 R 脚本，再调用其中的函数
+颜色 = #4F46E5
+启用 = 是
+引擎 = R
+执行方式 = 函数
+函数 = create_class_titlepic
+源文件 = /Users/ac/Documents/global_dir/create_class_titlepic.R
+路径参数 = htmlfile
+自定义代码 = 
+批量 = 逐文件
+输出 = 无
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = 数据概览
+说明 = 多行 R 代码用三引号块，直接用 .file / .dir
+颜色 = #0891B2
+启用 = 是
+引擎 = R
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = """
+x <- readRDS(.file)
+message("目录：", .dir)
+summary(x)
+"""
+批量 = 逐文件
+输出 = 打印
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = CSV→RDS
+说明 = 默认参数行可重复，停用参数不会传入
+颜色 = #16A34A
+启用 = 是
+引擎 = R
+执行方式 = 函数
+函数 = readr::read_csv
+源文件 = 
+路径参数 = file
+自定义代码 = 
+批量 = 整批
+输出 = .rds
+输出后缀 = _data
+写出代码 = 
+参数.show_col_types = FALSE
+停用参数.locale = readr::locale(encoding = "UTF-8")
+
+【转盘】
+编号 = EXAMPLE-WHEEL-005
+名称 = Stata 命令（示例）
+快捷键 = option
+槽位 = 5
+扇区数 = 3
+
+【扇区】
+标签 = 描述统计
+说明 = Stata 代码里直接使用 `file' / `dir'
+颜色 = #4F46E5
+启用 = 是
+引擎 = Stata
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = """
+use `"`file'"', clear
+summarize
+"""
+批量 = 逐文件
+输出 = 打印
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = 转 DTA
+说明 = 读入后由引擎自动写出 .dta
+颜色 = #0891B2
+启用 = 是
+引擎 = Stata
+执行方式 = 代码
+函数 = 
+源文件 = 
+路径参数 = 
+自定义代码 = use `"`file'"', clear
+批量 = 逐文件
+输出 = .dta
+输出后缀 = _glazed
+写出代码 = 
+
+【扇区】
+标签 = 自定义命令
+说明 = Stata 命令 + 默认参数按命令行片段拼接
+颜色 = #16A34A
+启用 = 是
+引擎 = Stata
+执行方式 = 函数
+函数 = describe
+源文件 = 
+路径参数 = 
+自定义代码 = 
+批量 = 逐文件
+输出 = 打印
+输出后缀 = _glazed
+写出代码 = 
+参数.shortly = 
+

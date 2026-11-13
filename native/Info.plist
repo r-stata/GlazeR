@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleName</key>
+	<string>GlazeR</string>
+	<key>CFBundleDisplayName</key>
+	<string>GlazeR 文件转盘</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.rstata.glazer</string>
+	<key>CFBundleVersion</key>
+	<string>1.0.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.0</string>
+	<key>CFBundleExecutable</key>
+	<string>GlazeR</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleIconFile</key>
+	<string>icon.icns</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>13.0</string>
+	<!-- 后台常驻：禁用 App Nap / App Sleep，保证不在前台时快捷键拖拽即时响应 -->
+	<key>LSAppNapIsDisabled</key>
+	<true/>
+	<key>NSAppSleepDisabled</key>
+	<true/>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.developer-tools</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>开发：微信公众号 RStata · 参考 DataWheel 转盘交互 · 本地执行 R / Python / Stata，数据不上传</string>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>GlazeR 需要读取你拖入的数据文件；开发态从源码目录启动时也需要读取应用自带的 R 执行引擎。</string>
+	<key>NSDesktopFolderUsageDescription</key>
+	<string>GlazeR 需要读取你从桌面拖入的数据文件。</string>
+	<key>NSDownloadsFolderUsageDescription</key>
+	<string>GlazeR 需要读取你从下载目录拖入的数据文件。</string>
+	<key>Credits</key>
+	<string>开发：微信公众号 RStata
+参考 DataWheel 转盘交互
+本地执行 R / Python / Stata · 数据不上传</string>
+
+	<!-- 右键文件 → 服务 → 用 GlazeR 处理 -->
+	<key>NSServices</key>
+	<array>
+		<dict>
+			<key>NSMenuItem</key>
+			<dict>
+				<key>default</key>
+				<string>用 GlazeR 处理</string>
+			</dict>
+			<key>NSMessage</key>
+			<string>glazeService</string>
+			<key>NSSendTypes</key>
+			<array>
+				<string>NSFilenamesPboardType</string>
+			</array>
+			<key>NSSendFileTypes</key>
+			<array>
+				<string>public.item</string>
+			</array>
+		</dict>
+	</array>
+
+	<!-- .glazer 是 GlazeR 专属文档类型：UTF-8 纯文本，导出 UTI 后由系统识别 -->
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>com.rstata.glazer.wheel</string>
+			<key>UTTypeDescription</key>
+			<string>GlazeR 转盘配置文件</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.plain-text</string>
+				<string>public.utf8-plain-text</string>
+			</array>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>glazer</string>
+				</array>
+				<key>public.mime-type</key>
+				<string>text/plain</string>
+			</dict>
+			<key>UTTypeIconFile</key>
+			<string>glazer-doc.icns</string>
+		</dict>
+	</array>
+
+	<!-- 双击 .glazer 文件默认用 GlazeR 打开；其余数据格式可在「打开方式」中选择 -->
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>GlazeR 转盘配置文件</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.rstata.glazer.wheel</string>
+			</array>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>glazer</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>glazer-doc.icns</string>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>text/plain</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>数据文件</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>csv</string><string>tsv</string><string>txt</string>
+				<string>xlsx</string><string>xls</string>
+				<string>dta</string><string>rds</string><string>rdata</string><string>RData</string>
+				<string>parquet</string><string>pq</string><string>feather</string><string>arrow</string>
+				<string>json</string><string>jsonl</string><string>ndjson</string>
+				<string>R</string><string>r</string><string>Rmd</string><string>sav</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

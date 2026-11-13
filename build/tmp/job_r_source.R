@@ -1,0 +1,15 @@
+# 回归：source() 的自定义函数内部也能直接引用路径变量
+.gz_mode <- "call"
+.gz_function <- "gz_probe_paths"
+.gz_source <- "/Users/ac/Documents/GitHub/GlazeR/build/tmp/probe_functions.R"
+.gz_code <- ""
+.gz_file_arg <- ""
+.gz_files <- c("/Users/ac/Documents/GitHub/GlazeR/testdata/sample.csv")
+.gz_param_keys <- character()
+.gz_param_exprs <- character()
+.gz_output_mode <- "print"
+.gz_output_dir <- "/Users/ac/Documents/GitHub/GlazeR/build/tmp"
+.gz_output_suffix <- "_r_source"
+.gz_output_code <- ""
+.gz_out_base <- "sample"
+.gz_workdir <- "/Users/ac/Documents/GitHub/GlazeR"
