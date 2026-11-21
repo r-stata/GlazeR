@@ -227,8 +227,6 @@ plutil -lint native/Info.plist
 
 转盘交互与全局监听改编自 [r-stata/DataWheel](https://github.com/r-stata/DataWheel)，其灵感来自 [KnifeLemon/Filee](https://github.com/KnifeLemon/Filee/)；项目由微信公众号 **RStata** 维护。所有计算均在本机完成，不上传任何数据。如果它帮你省下了重复劳动，欢迎给仓库点个 ⭐。
 
-> **许可**：本仓库目前尚未附带 `LICENSE` 文件。公开发布前请补充所选开源许可证，并同步更新本段说明。
-
 ---
 
 <p align="center"><a href="MANUAL.en.md">English guide</a> · <a href="README.zh-CN.md">完整中文手册</a> · <a href="../../releases">Releases</a></p>
